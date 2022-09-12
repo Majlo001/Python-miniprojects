@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QObject
+from db import TodoDatabase
 
 
 class Ui_Dialog(QObject):
@@ -18,6 +19,12 @@ class Ui_Dialog(QObject):
         super().__init__()
         self.editItemWindow = None
         self.isEditItemOpen = False
+        self.tempItems = []
+
+        db =  TodoDatabase()
+        db.create_database()
+        self.tempItems = db.fetch()
+
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -60,8 +67,14 @@ class Ui_Dialog(QObject):
         self.listWidget.setObjectName("listWidget")
         self.verticalLayout.addWidget(self.listWidget)
 
+        for item in self.tempItems:
+            self.add_it_from_db(item[0])
+
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def add_it_from_db(self, item):
+        self.listWidget.addItem(item)
 
     def add_it(self):
         if self.lineEdit.text() != "":
