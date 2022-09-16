@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>EditItem</class>
- <widget class="QWidget" name="EditItem">
+ <widget class="QDialog" name="EditItem">
   <property name="geometry">
    <rect>
     <x>0</x>

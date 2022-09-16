@@ -23,11 +23,10 @@ class TodoDatabase(object):
         self.conn.commit()
 
     def remove_all(self):
-        self.cur.execute("""DELETE * FROM todo_list""")
+        self.cur.execute("""DELETE FROM todo_list""")
         self.conn.commit()
 
     def __exit__(self):
-        self.conn.commit()
         self.cur.close()
         self.conn.close()
 
@@ -36,4 +35,4 @@ db = TodoDatabase()
 # db.insert("Cook lunch")
 # db.insert("Do homework")
 # db.insert("Program in Python")
-print(db.fetch())
+# print(db.fetch())
